@@ -1,27 +1,38 @@
 package ar.edu.utn.frbb.tup.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-public class Cliente extends Persona{
+import ar.edu.utn.frbb.tup.controller.dto.ClienteDto;
+
+public class Cliente extends Persona {
 
     private TipoPersona tipoPersona;
     private String banco;
     private LocalDate fechaAlta;
     private Set<Cuenta> cuentas = new HashSet<>();
-    private List<Long> listaCuentas = new ArrayList<>();
 
-    public List<Long> getListaCuentas() {
-        return listaCuentas;
+    // Constructor vacío requerido por Spring Boot para JSON
+    public Cliente() {
+        super();
     }
 
-    public void setListaCuentas(List<Long> listaCuentas) {
-        this.listaCuentas = listaCuentas;
+    // Constructor desde DTO
+    public Cliente(ClienteDto clienteDto) {
+        super(
+            clienteDto.getDni(),
+            clienteDto.getApellido(),
+            clienteDto.getNombre(),
+            clienteDto.getFechaNacimiento()
+        );
+
+        this.fechaAlta = LocalDate.now();
+        this.banco = clienteDto.getBanco();
+        this.tipoPersona = TipoPersona.fromString(clienteDto.getTipoPersona());
     }
 
+    // Getters y setters
     public TipoPersona getTipoPersona() {
         return tipoPersona;
     }
@@ -52,26 +63,15 @@ public class Cliente extends Persona{
 
     public void addCuenta(Cuenta cuenta) {
         this.cuentas.add(cuenta);
-        cuenta.setTitular(this);
     }
 
     public boolean tieneCuenta(TipoCuenta tipoCuenta, TipoMoneda moneda) {
-        for (Cuenta cuenta:
-                cuentas) {
-            if (tipoCuenta.equals(cuenta.getTipoCuenta()) && moneda.equals(cuenta.getMoneda())) {
+        for (Cuenta cuenta : cuentas) {
+            if (tipoCuenta.equals(cuenta.getTipoCuenta()) &&
+                moneda.equals(cuenta.getMoneda())) {
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "tipoPersona=" + tipoPersona +
-                ", banco='" + banco + '\'' +
-                ", fechaAlta=" + fechaAlta +
-                ", cuentas=" + cuentas +
-                '}';
     }
 }

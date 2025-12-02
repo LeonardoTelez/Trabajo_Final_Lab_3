@@ -1,19 +1,18 @@
 package ar.edu.utn.frbb.tup;
 
-import ar.edu.utn.frbb.tup.model.*;
-import ar.edu.utn.frbb.tup.presentation.input.MenuInputProcessor;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-class Application {
-
-    public static void main(String args[]) {
-
-        ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-
-        MenuInputProcessor processor = applicationContext.getBean(MenuInputProcessor.class);
-        processor.renderMenu();
+@SpringBootApplication(
+    exclude = {
+        org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration.class
     }
-
-
+)
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
+

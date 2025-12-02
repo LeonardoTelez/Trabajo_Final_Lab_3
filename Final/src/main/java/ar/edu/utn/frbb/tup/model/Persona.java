@@ -6,8 +6,19 @@ import java.time.Period;
 public class Persona {
     private String nombre;
     private String apellido;
-    private long dni;
+    private int dni;
     private LocalDate fechaNacimiento;
+
+    public Persona() {}
+    public Persona(int dni, String apellido, String nombre, String fechaNacimiento) {
+    this.dni = dni;
+    this.apellido = apellido;
+    this.nombre = nombre;
+    if (fechaNacimiento != null) {
+        this.fechaNacimiento = LocalDate.parse(fechaNacimiento);
+    }
+}
+
 
     public String getNombre() {
         return nombre;
@@ -25,11 +36,11 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public long getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(long dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -42,9 +53,12 @@ public class Persona {
     }
 
     public int getEdad() {
-        LocalDate currentDate = LocalDate.now();
-        Period agePeriod = Period.between(fechaNacimiento, currentDate);
-        return agePeriod.getYears();
+    if (fechaNacimiento == null) {
+        return 0; // o el valor que quieras por defecto
     }
+    LocalDate currentDate = LocalDate.now();
+    return Period.between(fechaNacimiento, currentDate).getYears();
+}
+
 }
 

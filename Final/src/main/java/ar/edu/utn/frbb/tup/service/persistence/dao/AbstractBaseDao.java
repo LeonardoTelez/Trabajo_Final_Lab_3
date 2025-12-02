@@ -1,16 +1,16 @@
-package ar.edu.utn.frbb.tup.persistence;
+package ar.edu.utn.frbb.tup.service.persistence.dao;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractBaseDao {
-    protected static Map<String, Map<Long, Object>> poorMansDatabase = new HashMap<>();
+    protected static Map<String, Map<Integer, Object>> poorMansDatabase = new HashMap<>();
     protected abstract String getEntityName();
 
-    protected Map<Long, Object> getInMemoryDatabase() {
+    protected Map<Integer, Object> getInMemoryDatabase() {
         if (poorMansDatabase.get(getEntityName()) == null) {
             poorMansDatabase.put(getEntityName(),new HashMap<>());
         }
-        return poorMansDatabase.get(getEntityName());
-    }
+        return poorMansDatabase.get(getEntityName());   
+    } 
 }

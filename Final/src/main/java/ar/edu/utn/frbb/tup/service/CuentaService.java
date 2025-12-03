@@ -33,7 +33,7 @@ public class CuentaService {
         }
 
         if (!tipoCuentaEstaSoportada(cuentaDto)) {
-            throw new TipoCuentaNoSoportadaException("El tipo de cuenta " + cuentaDto.getTipoCuenta() + " no esta soportada");
+            throw new TipoCuentaNoSoportadaException("El tipo de cuenta " + cuentaDto.getTipoCuenta() + " no esta soportada, tiene que ser (PESOS o DOLARES)");
         }
 
         Cuenta cuenta = new Cuenta(cuentaDto);

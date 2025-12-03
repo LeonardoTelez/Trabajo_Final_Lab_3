@@ -17,7 +17,7 @@ import ar.edu.utn.frbb.tup.model.Cuenta;
 import static ar.edu.utn.frbb.tup.controller.validator.CuentaValidator.validate;
 
 @RestController
-@RequestMapping("/Cuenta")
+@RequestMapping("/api/cuentas")
 public class CuentaController {
     @Autowired
     public CuentaService cuentaService;

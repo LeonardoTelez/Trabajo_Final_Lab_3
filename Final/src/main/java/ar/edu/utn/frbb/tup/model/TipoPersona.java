@@ -16,11 +16,14 @@ public enum TipoPersona {
     }
 
     public static TipoPersona fromString(String text) {
-        for (TipoPersona tipo : TipoPersona.values()) {
-            if (tipo.descripcion.equalsIgnoreCase(text)) {
-                return tipo;
-            }
-        }
-        throw new IllegalArgumentException("No se pudo encontrar un TipoPersona con la descripción: " + text);
-    }
+    text = text.trim().toUpperCase();
+
+    if (text.equals("F") || text.equals("FISICA") || text.equals("PERSONA_FISICA"))
+        return PERSONA_FISICA;
+
+    if (text.equals("J") || text.equals("JURIDICA") || text.equals("PERSONA_JURIDICA"))
+        return PERSONA_JURIDICA;
+
+    throw new IllegalArgumentException("TipoPersona inválido: " + text);
+}
 }

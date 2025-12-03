@@ -52,7 +52,7 @@ public class ClienteService {
 
     private void validatorAlta(Cliente cliente) throws ClienteAlreadyExistsException {
         if(clienteDao.find(cliente.getDni(), false) != null){
-            throw new ClienteAlreadyExistsException("Ya existe el cliente" + cliente.getDni());
+            throw new ClienteAlreadyExistsException("Ya existe el cliente con el dni: " + cliente.getDni());
         }
 
         if(cliente.getEdad() < 18){

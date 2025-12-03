@@ -27,7 +27,7 @@ public class DataLoader implements CommandLineRunner {
         Cliente c1 = new Cliente();
         c1.setDni(12345678);
         c1.setNombre("Leonardo");
-        c1.setApellido("Téllez");
+        c1.setApellido("Telez");
         c1.setBanco("UTN Bank");
         c1.setFechaAlta(java.time.LocalDate.now());
         c1.setTipoPersona(ar.edu.utn.frbb.tup.model.TipoPersona.PERSONA_FISICA);

@@ -9,38 +9,45 @@ import java.util.List;
 @RestController
 public class MenuController {
 
-    @GetMapping("/menu")
+    @GetMapping("/api/menu")
     public Map<String, Object> mostrarMenu() {
         return Map.of(
                 "titulo", "Menú principal del sistema bancario",
                 "opciones", List.of(
                         Map.of(
-                                "descripcion", "Crear cliente",
-                                "endpoint", "POST /Cliente"
-                        ),
-                        Map.of(
+                                "opcion", 1,
                                 "descripcion", "Obtener todos los clientes",
-                                "endpoint", "GET /Cliente"
+                                "endpoint", "GET /api/clientes"
                         ),
                         Map.of(
+                                "opcion", 2,
+                                "descripcion", "Crear cliente",
+                                "help", "El cliente debe ser mayor de edad (18 años mínimo)",
+                                "endpoint", "POST /api/clientes"
+                                
+                        ),
+                        Map.of(
+                                "opcion", 3,
                                 "descripcion", "Buscar las cuentas del cliente por DNI",
-                                "endpoint", "GET /Cliente/{dni}"
+                                "endpoint", "GET /api/clientes/{dni}"
                         ),
                         Map.of(
+                                "opcion", 4,
                                 "descripcion", "Crear cuenta",
-                                "endpoint", "POST /Cuenta"
+                                "help", "Solo se permiten cuentas en PESOS o DOLARES",
+                                "endpoint", "POST /api/cuentas"
+                                
                         ),
                         Map.of(
-                                "descripcion", "Mostrar cuentas de cliente",
-                                "endpoint", "GET /Cliente/{dni}/cuentas"
-                        ),
-                        Map.of(
+                                "opcion", 5,
                                 "descripcion", "Solicitar préstamo",
-                                "endpoint", "POST /Prestamo"
+                                "help", "La cuenta destino del préstamo debe existir y pertenecer al cliente solicitante",
+                                "endpoint", "POST /api/prestamos"
                         ),
                         Map.of(
+                                "opcion", 6,
                                 "descripcion", "Ver préstamos de un cliente",
-                                "endpoint", "GET /Prestamo/{dni}"
+                                "endpoint", "GET /api/prestamos/{dni}"
                         )
                 )
         );

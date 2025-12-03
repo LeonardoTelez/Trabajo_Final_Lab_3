@@ -1,29 +1,30 @@
 # TRABAJO FINAL LABORATORIO III - TELEZ LEONARDO
 
 # TABLA DE CONTENIDO
-- [Introduccion](#Introduccion)
-- [Ejecucion](#Ejecucion)
+- [Introduccion](#Introducción)
+- [Ejecucion](#Ejecución)
 - [Endpoints](#Endpoints)
-- [Instalacion](#Instalacion)
-- [Instalacion](#Instalacion)
+- [Instalacion](#Instalación)
+- [Instalacion](#Instalación)
 
-## INTRODUCCION
-Este proyecto consiste en un servicio REST desarrollado en Java con el framework Spring Boot. La aplicación simula el funcionamiento básico de un sistema bancario, permitiendo actualmente la creación y visualización de clientes, cuentas y el otorgamiento de prestamos. En futuras versiones se incorporarán nuevas funcionalidades como la modificación y eliminación de registros, entre otras mejoras.
+## INTRODUCCIÓN
+Este proyecto consiste en un servicio REST desarrollado en Java con el framework Spring Boot. La aplicación simula el funcionamiento básico de un sistema bancario, permitiendo actualmente la creación y visualización de clientes, cuentas y el otorgamiento de préstamos. En futuras versiones se incorporarán nuevas funcionalidades como la modificación y eliminación de registros, entre otras mejoras.
 
-## INSTALACION
-Para ejecutar este proyecto, es necesario tener instalado JDK de java y Maven. Una vez que se tengan estos requisitos, se puede ejecutar el siguiente comando en la terminal:
+## INSTALACIÓN
+Para ejecutar este proyecto, es necesario tener instalado Java JDK y Maven. Una vez que se tengan estos requisitos, se puede ejecutar el siguiente comando en la terminal:
 - mvn clean install
 
 ## EJECUCION
-Para ejecutar el proyecto, es necesario ejecutar el siguiente comando en la terminal:
+Para iniciar el proyecto, ejecutar el siguiente comando:
 - mvn spring-boot:run
 
-El proycto se podrá ver desde las siguientes opciones:
--  Servidor por defecto:\
-  http://localhost:8080
-- postman
+La aplicación estará disponible en:
 
-Para ejecutar las pruebas unitarias, es necesario ejecutar el siguiente comando en la terminal:
+  - 🌐 Servidor por defecto: http://localhost:8080
+
+  - 🧪 Postman
+
+Para ejecutar las pruebas unitarias:
 - mvn clean test
 
 ## ENDPOINTS

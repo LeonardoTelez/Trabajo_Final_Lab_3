@@ -6,9 +6,12 @@
 - [Endpoints](#Endpoints)
 - [Instalacion](#Instalación)
 - [Instalacion](#Instalación)
+- [Flujo_de_Logica](#Flujo_de_Logica)
+- [Flujo_de_un_endpoint](#Flujo_de_un_endpoint)
+- [Diagrama_de_flujo](#Diagrama_de_flujo)
 
 ## INTRODUCCIÓN
-Este proyecto consiste en un servicio REST desarrollado en Java con el framework Spring Boot. La aplicación simula el funcionamiento básico de un sistema bancario, permitiendo actualmente la creación y visualización de clientes, cuentas y el otorgamiento de préstamos. En futuras versiones se incorporarán nuevas funcionalidades como la modificación y eliminación de registros, entre otras mejoras.
+Este proyecto consiste en un servicio REST desarrollado en Java con el framework Spring Boot, y utiliza Maven como gestor de dependencias. Las pruebas unitarias se realizan con JUnit 5 y Mockito. La aplicación simula el funcionamiento básico de un sistema bancario, permitiendo actualmente la creación y visualización de clientes, cuentas y el otorgamiento de préstamos. En futuras versiones se incorporarán nuevas funcionalidades como la modificación y eliminación de registros, entre otras mejoras.
 
 ## INSTALACIÓN
 Para ejecutar este proyecto, es necesario tener instalado Java JDK y Maven. Una vez que se tengan estos requisitos, se puede ejecutar el siguiente comando en la terminal:
@@ -24,8 +27,10 @@ La aplicación estará disponible en:
 
   - 🧪 Postman
 
-Para ejecutar las pruebas unitarias:
+Para ejecutar las pruebas unitarias, ejecutar el siguiente comando :
 - mvn clean test
+
+En estos test se testean los servicios (Service), los validadores (Validator) y los controladores (Controller).
 
 ## ENDPOINTS
 ## 1. obtener todos los clientes
@@ -155,3 +160,62 @@ Para ejecutar las pruebas unitarias:
   - ### 📤 Respuesta esperada
 
     Devuelve una lista con todos los prestamos realizados por el cliente registrado.
+
+## FLUJO_DE_LÓGICA
+  - Controller → Service → DAO / Model → Response
+  - Los Controllers reciben las solicitudes y devuelven respuestas HTTP.
+  - Los Services contienen la lógica de negocio y validaciones importantes.
+  - Los DAOs se encargan de la persistencia de datos en la base de datos.
+  - Los Validators y métodos de scoring aseguran que se cumplan las reglas de negocio antes de   guardar cualquier dato.
+
+## FLUJO_DE_UN_ENDPOINT
+  Cuando un cliente solicita un préstamo, el flujo interno de la aplicación es el siguiente:
+
+    1. El cliente envía un JSON con los datos de la solicitud:
+
+      - numeroCliente
+      - montoPrestamo
+      - plazoMeses
+      - moneda
+
+    2. El PrestamoController recibe la solicitud y la pasa al PrestamoService.
+
+    3. El PrestamoService valida los datos y aplica la lógica de negocio:
+
+      - Verifica que el cliente exista a través de ClienteService.
+      - Verifica que el cliente tenga una cuenta válida en la moneda solicitada mediante CuentaService.
+      - Calcula el scoring del cliente (calcularScoring) para determinar la aprobación o rechazo del préstamo.
+
+    4. Dependiendo del scoring:
+
+      - Si el préstamo es aprobado:
+
+        .Se crea un objeto Prestamo con estado APROBADO.
+        .Se genera el plan de pagos (Cuota).
+        .Se guarda el préstamo en la base de datos usando PrestamoDao.
+
+      - Si el préstamo es rechazado:
+
+        .Se crea un objeto Prestamo con estado RECHAZADO.
+        .Se establece un mensaje explicativo para el cliente.
+
+    5. Se devuelve un objeto PrestamoOutputDto con el estado y el mensaje correspondiente al cliente.
+
+## DIAGRAMA_DE_FLUJO
+    Cliente
+      |
+      v
+    PrestamoController
+      |
+      v
+    PrestamoService
+      |
+      +--> ClienteService / CuentaService (validaciones)
+      |
+      +--> calcularScoring / Validator
+      |
+      v
+    PrestamoDao (persistencia)
+      |
+      v
+    PrestamoOutputDto (respuesta al cliente)

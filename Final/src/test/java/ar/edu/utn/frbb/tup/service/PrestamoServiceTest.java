@@ -99,18 +99,14 @@ class PrestamoServiceTest {
             prestamoDto.setNumeroCliente(12345678);
             prestamoDto.setPlazoMeses(12);
             prestamoDto.setMontoPrestamo(5000.0);
-            prestamoDto.setMoneda("PESOS"); // Debe coincidir con TipoMoneda
+            prestamoDto.setMoneda("PESOS");
 
-            // Ejecutamos el método
             PrestamoOutputDto resultado = prestamoService.pedirPrestamo(prestamoDto);
 
-            // Verificamos resultado
             assertEquals("APROBADO", resultado.getEstado());
             assertEquals("El monto del prestamo fue acreditado a su cuenta", resultado.getMensaje());
         }
     }
-
-
 
     // Rechazado por no tener cuenta permitida
 

@@ -11,7 +11,7 @@ public class PrestamoConsultaDto {
 
     public PrestamoConsultaDto(int dni) {
         this.numeroCliente = dni;
-        List<PrestamoConsulta> prestamos = new ArrayList<PrestamoConsulta>();
+        this.prestamos = new ArrayList<PrestamoConsulta>();
     }
 
     public long getNumeroCliente() {

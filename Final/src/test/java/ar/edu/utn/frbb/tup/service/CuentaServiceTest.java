@@ -48,7 +48,7 @@ public class CuentaServiceTest {
         Prestamo prestamo = new Prestamo();
         prestamo.setMoneda(TipoMoneda.PESOS.getDescripcion());
         prestamo.setNumeroCliente(12345678);
-        prestamo.setMontoPrestamo(Double.valueOf(1000));
+        prestamo.setMontoPrestamo(5000.0);
 
         Cuenta cuentaMock = mock(Cuenta.class);
         List<Cuenta> cuentas = new ArrayList<Cuenta>();
@@ -57,11 +57,11 @@ public class CuentaServiceTest {
         when(clienteService.getCuentasCliente(anyInt())).thenReturn(cuentas);
         when(cuentaMock.getTipoCuenta()).thenReturn(TipoCuenta.CAJA_AHORRO);
         when(cuentaMock.getMoneda()).thenReturn(TipoMoneda.PESOS);
-        when(cuentaMock.getBalance()).thenReturn(122.30);
+        when(cuentaMock.getBalance()).thenReturn(2000.50);
 
         cuentaService.actualizarCuentaCliente(prestamo);
 
-        verify(cuentaMock).setBalance(1122.30);
+        verify(cuentaMock).setBalance(7000.50);
     }
 
     // Tipo de cuenta soportada
